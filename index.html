@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATRONCITA <3</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #fce4ec;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Esto permite centrar el contenido verticalmente */
+            height: 100vh;
+        }
+
+        .text {
+            position: absolute;
+            top: 20px; /* Ajusta la distancia desde la parte superior */
+            text-align: center;
+            width: 100%;
+            font-size: 2.5rem; /* Tamaño de la fuente, puedes ajustarlo */
+            color: #ff4081; /* Color del texto */
+            font-family: 'Arial', sans-serif; /* Puedes cambiar la fuente si lo deseas */
+            font-weight: bold; /* Hace el texto más grueso */
+            z-index: 1; /* Asegura que el texto esté por encima de las imágenes */
+        }
+
+        .button-container {
+            position: absolute;
+            bottom: 50px; /* Ajusta la distancia desde la parte inferior */
+            text-align: center;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .button {
+            background-color: #ff4081; /* Color del botón */
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #e91e63; /* Color al pasar el cursor por encima */
+        }
+
+        .image {
+            position: absolute;
+            width: 150px; /* Ajusta el tamaño según lo que desees */
+            height: 150px; /* Ajusta el tamaño según lo que desees */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: float 5s ease-in-out infinite;
+            z-index: 0; /* Asegura que las imágenes estén detrás del texto */
+        }
+
+        @keyframes float {
+            0% {
+                transform: scale(0) translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5) translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="text"><br><br>Para ti con mucho amor <3</div> <!-- Texto principal -->
+    
+    <div class="button-container">
+        <button class="button" onclick="window.location.href='collage.html';"> CONTINUAR </button>
+    </div> <!-- Contenedor del botón -->
+
+    <script>
+        function createImage() {
+            const images = [
+                'img/cariño.jpg',
+                'img/pa.jpg',
+                'img/xd.jpg',
+                'img/ma.jpg',
+                'img/amor.jpg',  // Asegúrate de que esta ruta sea correcta
+                // Puedes agregar más imágenes aquí
+            ];
+
+            const randomImage = images[Math.floor(Math.random() * images.length)];
+
+            const image = document.createElement('div');
+            image.classList.add('image');
+            image.style.backgroundImage = `url(${randomImage})`;
+
+            image.style.left = '50%';
+            image.style.top = '50%';
+            image.style.transform = 'translate(-50%, -50%)';
+
+            const randomX = (Math.random() - 0.5) * 200 + 'vw';
+            const randomY = (Math.random() - 0.5) * 200 + 'vh';
+            image.style.setProperty('--x', randomX);
+            image.style.setProperty('--y', randomY);
+
+            document.body.appendChild(image);
+
+            setTimeout(() => {
+                image.remove();
+            }, 5000);
+        }
+
+        setInterval(createImage, 300);
+    </script>
+</body>
+</html>
